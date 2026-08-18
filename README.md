@@ -30,22 +30,6 @@ V **Nastavení → Nástěnky → Zdroje** potom přidejte JavaScriptový modul:
 /local/community/3fGauge/3f-gauge.js
 ```
 
-## Vývoj v Home Assistantu
-
-Repozitář naklonujte do `/config/repos/3fGauge/` a spusťte:
-
-```bash
-./deploy.sh
-```
-
-Skript vytvoří pouze vývojový symbolický odkaz:
-
-```text
-/config/www/community/3fGauge/3f-gauge.js -> /config/repos/3fGauge/3f-gauge.js
-```
-
-Do `www/community` se tak nevystavuje celý repozitář, ale pouze soubor potřebný pro běh karty. Po změně zdrojového souboru už není nutné skript spouštět znovu; stačí obnovit stránku s vymazáním cache prohlížeče. Tento symlink slouží jen pro lokální vývoj a není součástí instalace přes HACS.
-
 ## První testovací konfigurace
 
 ```yaml
