@@ -1,11 +1,20 @@
 type: custom:three-f-gauge-card
+name: Aktivní výkon
+icon:
+  template: >-
+    {% set power = states("sensor.active_power") | float(0) %}
+    {{ "mdi:transmission-tower-export" if power > 0 else "mdi:transmission-tower-import" }}
+icon_color:
+  template: >-
+    {% set power = states("sensor.active_power") | float(0) %}
+    {{ "#42a5f5" if power > 0 else "#ef5350" }}
 main:
   entity: sensor.active_power
-  name: Aktivní výkon
-  min: -12000
-  max: 12000
+  min: -17000
+  max: 4800
+  scale: logarithmic
   color_ranges:
-    - to: -0.01
+    - from: -17000
       color: "#ef5350"
     - from: 0
       color: "#42a5f5"
@@ -18,15 +27,15 @@ phases:
     - L1
     - L2
     - L3
-  min: -5000
-  max: 5000
+  min: -6000
+  max: 1800
+  scale: logarithmic
   color_ranges:
-    - to: -0.01
+    - from: -6000
       color: "#ef5350"
     - from: 0
-      to: 3500
       color: "#42a5f5"
-    - from: 3500.01
+    - from: 1200
       color: "#ffa726"
 description:
   template: >-

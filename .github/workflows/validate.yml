@@ -10,6 +10,20 @@ on:
 permissions: {}
 
 jobs:
+  test-javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript
+        run: |
+          node --check 3f-gauge.js
+          node tests/scale.test.cjs
+
   validate-hacs:
     runs-on: ubuntu-latest
     steps:
