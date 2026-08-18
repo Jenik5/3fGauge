@@ -1,48 +1,50 @@
 # 3f Gauge Card
 
-[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](#instalace-pres-hacs)
+**English** | [Čeština](docs/README_CZ.md)
+
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](#installation-with-hacs)
 [![Release](https://img.shields.io/github/v/release/Jenik5/3fGauge)](https://github.com/Jenik5/3fGauge/releases/latest)
 [![HACS validation](https://github.com/Jenik5/3fGauge/actions/workflows/validate.yml/badge.svg)](https://github.com/Jenik5/3fGauge/actions/workflows/validate.yml)
 [![Downloads](https://img.shields.io/github/downloads/Jenik5/3fGauge/total)](https://github.com/Jenik5/3fGauge/releases)
 [![License](https://img.shields.io/github/license/Jenik5/3fGauge)](LICENSE)
 
-Kompaktní Lovelace karta pro zobrazení jedné třífázové veličiny v Home Assistantu. Zobrazuje celkovou hodnotu (volitelně) a hodnoty fází L1, L2 a L3 jako čísla i horizontální bary.
+A compact Lovelace card for displaying a three-phase quantity in Home Assistant. It shows an optional total value and the L1, L2, and L3 phase values as numbers and horizontal bars.
 
-Aktuální verze: `2026.08.18.01`
+Current version: `2026.08.18.01`
 
 ![3f Gauge Card](docs/img/3fGaugeCard.png)
 
-## Instalace přes HACS
+## Installation with HACS
 
-1. V HACS otevřete nabídku **Custom repositories**.
-2. Přidejte `https://github.com/Jenik5/3fGauge` jako typ **Dashboard**.
-3. Vyhledejte **3f Gauge Card** a zvolte **Download**.
+1. Open **Custom repositories** in HACS.
+2. Add `https://github.com/Jenik5/3fGauge` as a **Dashboard** repository.
+3. Find **3f Gauge Card** and select **Download**.
 
-HACS kartu nainstaluje do `/config/www/community/3fGauge/` a obvykle také automaticky zaregistruje její JavaScriptový modul. Pokud se resource nevytvoří automaticky, přidejte v **Nastavení → Nástěnky → Zdroje**:
+HACS installs the card in `/config/www/community/3fGauge/` and usually registers its JavaScript module automatically. If the resource is not created automatically, add this path under **Settings → Dashboards → Resources**:
 
 ```text
 /hacsfiles/3fGauge/3f-gauge.js
 ```
 
-## Ruční instalace
+## Manual installation
 
-Stáhněte `3f-gauge.js` z poslední verze repozitáře do:
+Download `3f-gauge.js` from the latest repository release to:
 
 ```text
 /config/www/community/3fGauge/3f-gauge.js
 ```
 
-V **Nastavení → Nástěnky → Zdroje** potom přidejte JavaScriptový modul:
+Then add the JavaScript module under **Settings → Dashboards → Resources**:
 
 ```text
 /local/community/3fGauge/3f-gauge.js
 ```
 
-## První testovací konfigurace
+## Basic configuration
 
 ```yaml
 type: custom:three-f-gauge-card
-name: Aktivní výkon
+name: Active power
 main:
   entity: sensor.active_power
   min: -12000
@@ -56,28 +58,28 @@ phases:
   max: 5000
 ```
 
-Pokud jsou hodnoty pouze kladné, nastavte `min: 0`. Nula pak bude vlevo. Pokud je `min` záporné a `max` kladné, karta umístí nulu na odpovídající místo uvnitř baru a záporné hodnoty vykreslí doleva.
+For values that are always positive, set `min: 0`. Zero will then be positioned on the left. If `min` is negative and `max` is positive, the card places zero at the corresponding point inside the bar and draws negative values to the left.
 
-## Konfigurace
+## Configuration
 
-| Klíč | Povinný | Popis |
+| Key | Required | Description |
 |---|---:|---|
-| `type` | ano | Vždy `custom:three-f-gauge-card`. |
-| `name` | ne | Název karty. Funguje i bez hlavní gauge. |
-| `main` | ne | Konfigurace hlavní hodnoty. |
-| `phases` | ano | Konfigurace přesně tří fází. |
-| `description` | ne | Pravá doplňková informace: text, stav entity nebo Home Assistant template. |
-| `icon` | ne | Ikona karty jako pevná hodnota nebo Home Assistant template. Bez nastavení se použije ikona hlavní entity. |
-| `icon_color` | ne | Barva ikony jako pevná CSS barva nebo Home Assistant template. |
-| `show_name` | ne | Zobrazení názvu; výchozí hodnota je `true`. |
-| `show_icon` | ne | Zobrazení ikony; výchozí hodnota je `true`. |
-| `show_description` | ne | Zobrazení popisu; výchozí hodnota je `true`. |
+| `type` | yes | Always `custom:three-f-gauge-card`. |
+| `name` | no | Card name. It also works without a main gauge. |
+| `main` | no | Main value configuration. |
+| `phases` | yes | Configuration for exactly three phases. |
+| `description` | no | Additional information shown on the right: text, an entity state, or a Home Assistant template. |
+| `icon` | no | A fixed icon or Home Assistant template. The main entity icon is used when this is not set. |
+| `icon_color` | no | A fixed CSS icon color or Home Assistant template. |
+| `show_name` | no | Shows the name; defaults to `true`. |
+| `show_icon` | no | Shows the icon; defaults to `true`. |
+| `show_description` | no | Shows the description; defaults to `true`. |
 
-### Vizuální editor
+### Visual editor
 
-Karta poskytuje vizuální editor se třemi záložkami pro obecné nastavení, hlavní ukazatel a ukazatele fází. V nastavení hlavního ukazatele a fází lze také přidávat a odebírat barevné segmenty.
+The card provides a visual editor with three tabs for general settings, the main gauge, and the phase gauges. Color segments can also be added or removed in the main and phase gauge settings.
 
-Editor automaticky používá jazyk uživatelského profilu Home Assistantu. Součástí jsou lokalizace pro angličtinu (`en`), češtinu (`cs`), slovenštinu (`sk`), němčinu (`de`) a polštinu (`pl`). Pro ostatní jazyky se použije angličtina.
+The editor automatically follows the language selected in the Home Assistant user profile. English (`en`), Czech (`cs`), Slovak (`sk`), German (`de`), and Polish (`pl`) are included. English is used as the fallback for other languages.
 
 <table>
   <tr>
@@ -88,15 +90,15 @@ Editor automaticky používá jazyk uživatelského profilu Home Assistantu. Sou
   <tr>
     <td valign="top"><img src="docs/img/GeneralSettings.png" alt="General settings" width="300"></td>
     <td valign="top"><img src="docs/img/MainGaugeSettings.png" alt="Main gauge settings" width="300"></td>
-    <td valign="top"><img src="docs/img/PhaseGaugesSettings.png" alt="Phase gauges settings" width="300"></td>
+    <td valign="top"><img src="docs/img/PhaseGaugesSettings.png" alt="Phase gauge settings" width="300"></td>
   </tr>
 </table>
 
-### Rozložení v Sections view
+### Layout in Sections view
 
-Karta podporuje editor rozložení Home Assistantu. Minimální šířka je 6 z 12 sloupců. Běžná karta nebo karta s hlavní gauge vyžaduje nejméně 2 řádky.
+The card supports the Home Assistant layout editor. Its minimum width is 6 of 12 columns. A regular card or a card with the main gauge enabled requires at least 2 rows.
 
-Pokud není nastavena hlavní gauge a zároveň není zobrazen název, ikona ani popis, lze výšku zmenšit na 1 řádek:
+When the main gauge is disabled and the name, icon, and description are all hidden, the card can be reduced to 1 row:
 
 ```yaml
 show_name: false
@@ -106,12 +108,12 @@ phases:
   # ...
 ```
 
-Při nastavení větší výšky karta vyplní celý přidělený prostor a přebytečná výška se projeví jako větší spodní prostor. Volby viditelnosti pouze skryjí příslušné části; jejich nastavené hodnoty nemažou.
+When a larger height is selected, the card fills all assigned space and the extra height appears as additional space at the bottom. Visibility options only hide their respective elements; they do not delete the configured values.
 
-### Hlavní hodnota
+### Main value
 
 ```yaml
-name: Aktivní výkon
+name: Active power
 main:
   entity: sensor.active_power
   min: -12000
@@ -121,30 +123,30 @@ main:
   color: var(--primary-color)
 ```
 
-`name` je na nejvyšší úrovni konfigurace a zobrazuje se vlevo v horním řádku. Pokud není uvedeno, použije se `friendly_name` hlavní entity nebo první dostupné fáze. Starší zápis `main.name` karta nadále načte kvůli zpětné kompatibilitě.
+`name` is a top-level configuration option displayed on the left side of the header. If omitted, the card uses the `friendly_name` of the main entity or the first available phase. The older `main.name` syntax remains supported for backward compatibility.
 
-Pokud celkový senzor neexistuje a součet dává pro danou veličinu smysl, lze jej vypočítat z fází:
+If there is no total sensor and calculating a sum makes sense for the quantity, the main value can be calculated from the phases:
 
 ```yaml
-name: Celkem
+name: Total
 main:
   calculate: sum
   min: 0
   max: 15000
 ```
 
-`entity` má přednost před `calculate`. Kliknutí na hlavní hodnotu nebo bar otevře dialog senzoru; u vypočteného součtu dialog není k dispozici.
+`entity` takes precedence over `calculate`. Clicking the main value or bar opens the sensor details dialog. The dialog is not available for a calculated sum.
 
-### Ikona
+### Icon
 
-Ikonu entity lze přepsat pevnou ikonou a barvou:
+The entity icon can be overridden with a fixed icon and color:
 
 ```yaml
 icon: mdi:transmission-tower
 icon_color: "#42a5f5"
 ```
 
-Obě hodnoty mohou být reaktivní Home Assistant Jinja template. Díky tomu se ikona i její barva mohou měnit podle směru toku energie:
+Both values can use reactive Home Assistant Jinja templates, allowing the icon and its color to change with the direction of energy flow:
 
 ```yaml
 icon:
@@ -157,9 +159,9 @@ icon_color:
     {{ "#66bb6a" if power > 0 else "#ef5350" }}
 ```
 
-Template se automaticky přepočítá při změně použitých entit. Stejně jako u `description` lze volitelná data předat mapou `variables` uvnitř příslušného objektu.
+Templates are recalculated automatically when the referenced entities change. As with `description`, optional data can be passed in a `variables` map inside the corresponding object.
 
-### Fáze
+### Phases
 
 ```yaml
 phases:
@@ -175,11 +177,11 @@ phases:
   color: "#03a9f4"
 ```
 
-`min` a `max` jsou společné pro všechny tři fáze. `names`, `precision`, `unit`, `color` a `scale` jsou volitelné. Jednotka se standardně převezme z atributu senzoru.
+`min` and `max` are shared by all three phases. `names`, `precision`, `unit`, `color`, and `scale` are optional. By default, the unit is read from the sensor attributes.
 
-### Stupnice barů
+### Bar scale
 
-Výchozí stupnice je lineární. Pokud velký rozsah způsobuje, že jsou běžné malé hodnoty téměř neviditelné, lze pro `main` i `phases` samostatně zapnout logaritmickou stupnici:
+The default scale is linear. If a large range makes normal low values almost invisible, a logarithmic scale can be enabled independently for `main` and `phases`:
 
 ```yaml
 main:
@@ -189,18 +191,18 @@ main:
   scale: logarithmic
 ```
 
-Hodnota `scale: logarithmic` zvýrazní změny blízko nuly a postupně stlačí vyšší hodnoty. Nula i oba konce rozsahu zůstávají přesné. Pokud rozsah obsahuje záporné i kladné hodnoty, transformuje se každá strana samostatně a poloha nuly se stále určuje z poměru `min` a `max`. V uvedeném příkladu je proto nula přibližně v 78 % šířky baru, nikoliv uprostřed.
+`scale: logarithmic` emphasizes changes close to zero while progressively compressing larger values. Zero and both ends of the range remain exact. When the range contains both negative and positive values, each side is transformed independently and the zero position is still determined by the ratio between `min` and `max`. In the example above, zero is therefore located at approximately 78% of the bar width rather than in the center.
 
-Podporované hodnoty `scale` jsou:
+Supported `scale` values are:
 
-- `linear` – výchozí lineární průběh,
-- `logarithmic` – výraznější změny při nízkých hodnotách.
+- `linear` — the default linear scale,
+- `logarithmic` — makes changes at low values more visible.
 
-Číselné hodnoty, barevné intervaly a ořezávání mimo rozsah vždy používají skutečnou hodnotu senzoru; logaritmická stupnice ovlivňuje pouze délku baru.
+Numeric values, color segments, and clamping outside the range always use the actual sensor value. The logarithmic scale only affects the rendered bar length.
 
-### Barevné intervaly
+### Color segments
 
-Pevnou barvu lze doplnit barevnými segmenty. Každý segment začíná hodnotou `from` a platí až do začátku následujícího segmentu. Vyhraje tedy segment s nejvyšší hodnotou `from`, která je menší nebo rovna aktuální hodnotě. Pro hodnoty pod prvním segmentem se použije základní `color`.
+A fixed color can be supplemented with color segments. Each segment starts at its `from` value and applies until the next segment begins. The segment with the highest `from` value less than or equal to the current value is used. The base `color` applies below the first segment.
 
 ```yaml
 phases:
@@ -220,41 +222,41 @@ phases:
       color: orange
 ```
 
-Barva může být zapsaná jako HEX (`#66bb6a`), `rgb(...)`, standardní CSS název (`red`, `green`, `orange`…) nebo proměnná tématu (`var(--primary-color)`). Stejné klíče `color` a `color_ranges` lze použít i v sekci `main`.
+Colors can be written as HEX (`#66bb6a`), `rgb(...)`, a standard CSS color name (`red`, `green`, `orange`, and so on), or a theme variable (`var(--primary-color)`). The same `color` and `color_ranges` options are available in the `main` section.
 
-Starší konfigurace s explicitním `to` zůstávají podporované. Vizuální editor je při první změně segmentů převede na prahový zápis pouze s `from`.
+Older configurations with an explicit `to` value remain supported. The visual editor converts them to the threshold format using only `from` the first time the segments are changed.
 
-### Doplňkový popis
+### Additional description
 
-Statický text:
+Static text:
 
 ```yaml
-description: Odběr ze sítě
+description: Grid consumption
 ```
 
-Stav entity (např. template senzoru vytvořeného v Home Assistantu):
+Entity state, for example from a Home Assistant template sensor:
 
 ```yaml
 description:
   entity: sensor.grid_flow_description
 ```
 
-Přímo reaktivní Home Assistant Jinja template:
+A directly reactive Home Assistant Jinja template:
 
 ```yaml
 description:
   template: >-
     {% set power = states("sensor.active_power") | float(0) %}
-    {{ "Dodávka" if power > 0 else "Odběr" }}
+    {{ "Export" if power > 0 else "Consumption" }}
 ```
 
-Template se přepočítá automaticky při změně použitých entit. Volitelná data lze předat také mapou `description.variables`.
+The template is recalculated automatically when the referenced entities change. Optional data can also be passed in a `description.variables` map.
 
-## Poznámky
+## Notes
 
-- Hodnoty mimo nastavený rozsah jsou v baru oříznuty na minimum nebo maximum; číselná hodnota zůstane skutečná.
-- Nedostupný nebo nečíselný senzor se zobrazí jako `Unavailable` a jeho bar je zeslabený.
+- Values outside the configured range are clamped to the minimum or maximum in the bar; the displayed numeric value remains unchanged.
+- An unavailable or non-numeric sensor is displayed as `Unavailable`, and its bar is dimmed.
 
-## Verzování
+## Versioning
 
-Verze používají formát `YYYY.MM.DD.NN`, kde poslední dvojčíslí označuje pořadí vydání v daném dni. Například `2026.08.18.01` je první vydání z 18. srpna 2026.
+Versions use the `YYYY.MM.DD.NN` format, where the final two digits indicate the release sequence for that day. For example, `2026.08.18.01` is the first release from August 18, 2026.
