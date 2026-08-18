@@ -1,5 +1,11 @@
 # 3f Gauge Card
 
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](#instalace-pres-hacs)
+[![Release](https://img.shields.io/github/v/release/Jenik5/3fGauge)](https://github.com/Jenik5/3fGauge/releases/latest)
+[![HACS validation](https://github.com/Jenik5/3fGauge/actions/workflows/validate.yml/badge.svg)](https://github.com/Jenik5/3fGauge/actions/workflows/validate.yml)
+[![Downloads](https://img.shields.io/github/downloads/Jenik5/3fGauge/total)](https://github.com/Jenik5/3fGauge/releases)
+[![License](https://img.shields.io/github/license/Jenik5/3fGauge)](LICENSE)
+
 Kompaktní Lovelace karta pro zobrazení jedné třífázové veličiny v Home Assistantu. Zobrazuje celkovou hodnotu (volitelně) a hodnoty fází L1, L2 a L3 jako čísla i horizontální bary.
 
 ![3f Gauge Card](doc/img/3fGauge.png)
