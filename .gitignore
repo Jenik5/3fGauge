@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+node_modules/
+
+# Local design notes and source concepts
+mission/
